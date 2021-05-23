@@ -1,7 +1,7 @@
 # city-explorer
 
 **Author**: Mohammad Zytoon
-**Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
+**Version**: 1.1.0 (increment the patch/fix version number if you make more commits past your first submission)
 
 ## Overview
 React application that uses the Axios library to make user-initiated reqeusts for data from a thrid-party API.
@@ -18,4 +18,15 @@ Js6,axios and react.
 01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
 
 ## Credit and Collaborations
-<!-- Give credit (and a link) to other people or resources that helped you build this application. -->
+untill now only me
+
+
+## Time Estimated:
+Name of feature: lab06
+Estimate of time needed to complete: 3 hours
+
+Start time: 2:00pm
+
+Finish time: 7:35pm
+
+Actual time needed to complete: 5:30 hour
