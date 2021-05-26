@@ -5,6 +5,9 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Alert from 'react-bootstrap/Alert';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import weather from './weather.js';
+import dotenv from 'dotenv';
 
 class App extends React.Component {
 
@@ -15,12 +18,20 @@ class App extends React.Component {
       locatData: '',
       displayMap: false,
       errorMessage: false,
-      theError: ''
+      theError: '',
+      weatherItem:{},
+      showWeather:false
     }
   }
 
   getPlace = async (event) => {
     event.preventDefault();
+    let serverRoute= process.env.REACT_APP_SERVER;
+
+    const url = `http://localhost:3001/weather?searchQuery=paris&lat=48.8566969&long=2.3514616`;
+
+    const importedData = await axios.get(url);
+
 
     let placeUrl = `https://eu1.locationiq.com/v1/search.php?key=pk.2b421377eaad8060e237f29dd060432b&q=${this.state.quearySearch}&format=json`;
 
@@ -38,7 +49,8 @@ class App extends React.Component {
       this.setState({
         displayMap: false,
         errorMessage: true,
-        theError: error
+        theError: error,
+        showWeather: false
       })
     }
   }
@@ -89,6 +101,9 @@ class App extends React.Component {
             Try Another Entry, Error:
         {this.state.theError.response.status}
           </Alert>
+        }
+        {
+          this.state.showWeather && <weather weatherData={this.state.weatherItem}></weather>
         }
       </div>
 
