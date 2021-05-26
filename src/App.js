@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Alert from 'react-bootstrap/Alert';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import weather from './weather.js';
+import Weather from './Weather';
 import dotenv from 'dotenv';
 
 class App extends React.Component {
@@ -19,18 +19,20 @@ class App extends React.Component {
       displayMap: false,
       errorMessage: false,
       theError: '',
-      weatherItem:{},
-      showWeather:false
+      weatherItem: [],
+      showWeather: false,
+      lat: '',
+      long: '',
     }
   }
 
   getPlace = async (event) => {
     event.preventDefault();
-    let serverRoute= process.env.REACT_APP_SERVER;
+    let serverRoute = process.env.REACT_APP_SERVER;
 
-    const url = `http://localhost:3001/weather?searchQuery=paris&lat=48.8566969&long=2.3514616`;
+    // const url = `http://localhost:3001/weather?searchQuery=paris&lat=48.8566969&long=2.3514616`;
 
-    const importedData = await axios.get(url);
+    // const importedData = await axios.get(url);
 
 
     let placeUrl = `https://eu1.locationiq.com/v1/search.php?key=pk.2b421377eaad8060e237f29dd060432b&q=${this.state.quearySearch}&format=json`;
@@ -42,7 +44,9 @@ class App extends React.Component {
       this.setState({
         locatData: placeResult.data[0],
         displayMap: true,
-        errorMessage: false
+        errorMessage: false,
+        lat: placeResult.data[0].lat,
+        long: placeResult.data[0].lon
       })
     }
     catch (error) {
@@ -50,16 +54,38 @@ class App extends React.Component {
         displayMap: false,
         errorMessage: true,
         theError: error,
-        showWeather: false
+
+      })
+    }
+
+
+
+
+    
+    try {
+      const url = `${serverRoute}/weather?quearySearch=${this.state.quearySearch}&lon=${this.state.long}&lat=${this.state.lat}`;
+      let importedData = await axios.get(url);
+      this.setState({
+        showWeather: true,
+        weatherItem: importedData.data,
+      })
+      console.log(this.state.weatherItem)
+    }
+    catch (error) {
+      this.setState({
+        weatherItem: error.response,
+        showWeather: false,
       })
     }
   }
-
+  
   updateQuearySearch = (event) => {
     this.setState({
-      quearySearch: event.target.value
+      quearySearch: event.target.value,
     })
   }
+  
+
 
   render() {
     return (
@@ -80,7 +106,7 @@ class App extends React.Component {
           </Button>
         </Form>
 
-        
+
         {this.state.displayMap &&
 
           <Card style={{ width: '18rem' }}>
@@ -88,7 +114,7 @@ class App extends React.Component {
             <Card.Body>
               <Card.Title>{this.state.locatData.display_name}</Card.Title>
               <Card.Text>
-                {this.state.locatData.lat} 
+                {this.state.locatData.lat}<br></br>
                 {this.state.locatData.lon}
               </Card.Text>
             </Card.Body>
@@ -102,9 +128,11 @@ class App extends React.Component {
         {this.state.theError.response.status}
           </Alert>
         }
-        {
+        {/* {
           this.state.showWeather && <weather weatherData={this.state.weatherItem}></weather>
-        }
+        } */}
+        {this.state.displayMap &&
+        <Weather weatherData={this.state.weatherItem} showWeather={this.state.showWeather}></Weather>}
       </div>
 
     );
