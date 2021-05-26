@@ -7,7 +7,7 @@ import Card from 'react-bootstrap/Card';
 import Alert from 'react-bootstrap/Alert';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Weather from './Weather';
-import dotenv from 'dotenv';
+// import dotenv from 'dotenv';
 
 class App extends React.Component {
 
