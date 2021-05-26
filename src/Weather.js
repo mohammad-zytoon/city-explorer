@@ -34,7 +34,7 @@ class Weather extends React.Component {
 
                     </ListGroup>
                 }
-                {this.props.showWeather == false &&
+                {this.props.showWeather === false &&
 
                     <ListGroup>
 
