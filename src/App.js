@@ -1,4 +1,3 @@
-
 import './App.css';
 import React from 'react';
 import axios from 'axios';
@@ -9,6 +8,7 @@ import Alert from 'react-bootstrap/Alert';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Weather from './Weather';
 // import dotenv from 'dotenv';
+
 import Movies from './Movies';
 
 class App extends React.Component {
@@ -167,3 +167,5 @@ class App extends React.Component {
     <button>Explore</button>
     <input type='submit' value='Get Location' />
     </form> */}
+
+
