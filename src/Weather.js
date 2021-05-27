@@ -4,12 +4,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 class Weather extends React.Component {
 
+
+    
     constructor(props) {
         super(props);
         this.state = {
             weatherArray: this.props.weatherData
         }
     }
+
 
     render() {
         return (
@@ -36,7 +39,11 @@ class Weather extends React.Component {
                 }
                 {this.props.showWeather === false &&
 
+
+
+
                     <ListGroup>
+
 
                         <ListGroup.Item action variant="danger">
                             {this.props.weatherData.data}
@@ -53,8 +60,19 @@ class Weather extends React.Component {
 export default Weather;
 
 // getWhetherData= async() =>{
+
+    //     let serverRoute= process.env.REACT_APP_SERVER;
+    //     const url= `${serverRoute}/weather?searchQuery=paris&lat=48.8566969&long=2.3514616`;
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         weatherArray: this.props.weatherData
+    //     }
+    // }
+
 //     let serverRoute= process.env.REACT_APP_SERVER;
 //     const url= `${serverRoute}/weather?searchQuery=paris&lat=48.8566969&long=2.3514616`;
+
     
 //     const weatherItem= await axios.get(url)
 // }
